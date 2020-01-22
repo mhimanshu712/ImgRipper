@@ -43,7 +43,7 @@ def download():
 		print('url>>> ',url)
 		res = rq.get(url)
 		if res.status_code == 200:
-			with open('./download/'+filename,'wb') as f:
+			with open('./downloads/'+filename,'wb') as f:
 				f.write(res.content)
 
 	messagebox.showinfo('Done','Done Downloading')
