@@ -24,27 +24,22 @@ def download():
 		if image.has_attr('src'):
 			imgarr.append(image['src'])
 
-	messagebox.askyesno('Download?',f"{len(imgarr)} images found!\nDownload All?")
-	print(imgarr[0])
-	ind = imgarr[0].rindex('/')+1
-	print(imgarr[0][ind:])
-	print('oooo')
-
-	for img in imgarr:
-		fileindex = img.rindex('/')+1
-		filename = img[fileindex:]
-		if '?' in filename:
-			fileindex = filename.rindex('?')
-			filename = filename[:fileindex]
-		print(filename)
-		url = img
-		if not '://' in img:
-			url = e.get() + img
-		print('url>>> ',url)
-		res = rq.get(url)
-		if res.status_code == 200:
-			with open('./downloads/'+filename,'wb') as f:
-				f.write(res.content)
+	if messagebox.askyesno('Download?',f"{len(imgarr)} images found!\nDownload All?"):
+		for img in imgarr:
+			fileindex = img.rindex('/')+1
+			filename = img[fileindex:]
+			if '?' in filename:
+				fileindex = filename.rindex('?')
+				filename = filename[:fileindex]
+			print(filename)
+			url = img
+			if not '://' in img:
+				url = e.get() + img
+			print('url>>> ',url)
+			res = rq.get(url)
+			if res.status_code == 200:
+				with open('./downloads/'+filename,'wb') as f:
+					f.write(res.content)
 
 	messagebox.showinfo('Done','Done Downloading')
 
