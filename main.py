@@ -2,8 +2,15 @@ from bs4 import BeautifulSoup as bs
 import requests as rq
 import tkinter as tk
 from tkinter import messagebox
+import os
 
 root = tk.Tk()
+
+#Make download dic
+try:
+	os.mkdir('downloads')
+except:
+	pass
 
 def download():
 	imgarr = []
